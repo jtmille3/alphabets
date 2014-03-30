@@ -5,18 +5,18 @@ angular.module('alphabetsApp')
     initialize();
 
     $scope.handleKeyup = function(e) {
-    	if($scope.letter) {
+    	if($scope.selectedLetter) {
 			var key = e.which;
 			var letter = String.fromCharCode(key).toUpperCase();
-			if($scope.letter === letter) {
-				$scope.right.push($scope.letter);
-				$scope.letter = $scope.letters.splice(0, 1)[0] || '';
-			} else if(!Lazy($scope.wrong).contains($scope.letter)) {
-				$scope.wrong.push($scope.letter);
+			if($scope.selectedLetter === letter) {
+				$scope.right.push($scope.selectedLetter);
+				$scope.selectedLetter = $scope.letters.splice(0, 1)[0] || '';
+			} else if(!Lazy($scope.wrong).contains($scope.selectedLetter)) {
+				$scope.wrong.push($scope.selectedLetter);
 			}
 		} else {
 			// restart
-			initialize();
+			initialize(true);
 		}
     };
 
@@ -25,11 +25,16 @@ angular.module('alphabetsApp')
 		var letter = String.fromCharCode(key).toUpperCase();
     }
 
-    function initialize() {
+    function initialize(shuffle) {
+    	var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     	$scope.right = [];
 	    $scope.wrong = [];
 
-	    $scope.letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-	    $scope.letter = $scope.letters.splice(0, 1)[0];	
+	    if(shuffle) {
+	    	alphabet = Lazy(alphabet).shuffle().toArray();
+	    }
+
+	    $scope.letters = alphabet;
+	    $scope.selectedLetter = $scope.letters.splice(0, 1)[0];
     }
   });

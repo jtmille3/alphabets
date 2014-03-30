@@ -1,5 +1,10 @@
 <div class="text-center" ng-global-keyup="handleKeyup" ng-global-keydown="handleKeydown">
-  <h4><span ng-repeat="letter in right" ng-class="{'danger': wrong.indexOf(letter) != -1, 'success': wrong.indexOf(letter) == -1}">{{letter}} </span><span class="current">{{letter}} </span><span ng-repeat="letter in letters">{{letter}} </span></h4>
-  <div class="letter">{{letter}}</div>
-  <div class="letter" ng-show="letter == ''">Restart?</div>
+  <h4>
+  	<span ng-repeat="letter in right" ng-class="{'danger': wrong.indexOf(letter) != -1, 'success': wrong.indexOf(letter) == -1}">{{letter}} </span>
+  	<span class="current">{{selectedLetter}} </span>
+  	<span ng-repeat="letter in letters">{{letter}} </span>
+  </h4>
+  <div class="letter">{{selectedLetter}}</div>
+  <!-- <canvas width="256" height="256" id="letterCanvas"></canvas> -->
+  <div class="letter" ng-show="selectedLetter == ''">Restart?</div>
 </div>
